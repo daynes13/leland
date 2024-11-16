@@ -1,0 +1,92 @@
+/* General body styling */
+body {
+    font-family: Calibri, sans-serif; /* Updated font family */
+    text-align: center;
+    background-color: #f8f8f8;
+    color: #000000; /* Set default text color to black */
+}
+
+/* Main container styling */
+.container {
+    max-width: 70vw; /* Adjust size relative to screen width */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Header and text styling */
+h2 {
+    font-size: 20pt;
+    color: #000000; /* Black color for primary headings */
+    margin-bottom: 20px;
+}
+
+#question-text {
+    font-size: 20pt;
+    margin-bottom: 20px;
+    color: #000000; /* Black color for question text */
+}
+
+#question-count {
+    font-family: Calibri, sans-serif;
+    font-size: 16pt;
+    letter-spacing: -0.01em; /* -1% letter spacing */
+    margin-bottom: 15px;
+    color: #000000; /* Black color for question count */
+}
+
+/* Answer button container styling */
+.btn-container button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 16pt;
+    font-family: Calibri, sans-serif;
+    letter-spacing: -0.01em; /* -1% letter spacing */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff; /* White background for non-selected state */
+    color: #000000; /* Black text color for non-selected state */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-container button:hover {
+    background-color: #13C385; /* Hover state color */
+    color: #ffffff; /* White text on hover */
+}
+
+.selected {
+    background-color: #06925F; /* Selected answer state */
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Back and Next button styling */
+.next-btn, .back-btn {
+    padding: 10px 20px;
+    font-size: 18pt;
+    font-family: Calibri, sans-serif; /* Updated font family for buttons */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #18B078; /* Not selected state color */
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+.next-btn:hover, .back-btn:hover {
+    background-color: #13C385; /* Hover state color */
+}
+
+.next-btn.disabled {
+    opacity: 0.6; /* Reduced opacity for disabled state */
+    cursor: not-allowed;
+}
+
+.d-none {
+    display: none;
+}
