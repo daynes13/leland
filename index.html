@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRE vs GMAT Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-left">
+            <img src="leland-logo.png" alt="Leland Logo" class="logo"> <!-- Add your Leland logo here -->
+            <span class="header-title">Leland</span>
+            <div class="categories-dropdown">
+                Categories
+                <span class="dropdown-arrow">&#9660;</span> <!-- Dropdown arrow -->
+            </div>
+        </div>
+        <div class="header-right">
+            <span class="header-link">Free events</span>
+            <span class="header-icon">
+                <img src="inbox-icon.png" alt="Inbox" class="inbox-icon"> <!-- Add your inbox icon here -->
+            </span>
+            <div class="profile-circle">A</div> <!-- Profile circle with the initial -->
+        </div>
+    </header>
+
+    <div class="outer-container">
+        <div class="center-container">
+            <div class="container">
+                <!-- Back Arrow Icon -->
+                <div class="back-arrow" onclick="backQuestion()">
+                    &#8592;
+                </div>
+
+                <!-- Quiz Question Section -->
+                <section id="quiz-container">
+                    <div id="question-count" class="question-count"></div>
+                    <h2 id="question-text" class="question-text"></h2>
+                    
+                    <div id="answer-buttons" class="btn-container">
+                        <!-- Answer options will be generated here dynamically -->
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="navigation-buttons">
+                        <button id="back-button" class="back-btn d-none" onclick="backQuestion()">Back</button>
+                        <button id="next-button" class="next-btn disabled" onclick="nextQuestion()">Continue</button>
+                    </div>
+                </section>
+
+                <!-- Quiz Results Section (Initially Hidden) -->
+                <section id="result-container" class="d-none">
+                    <h2>Your Recommended Test</h2>
+                    <p id="result-text"></p>
+                    <button onclick="startQuiz()" class="restart-btn">Retake Quiz</button>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
