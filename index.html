@@ -7,32 +7,44 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Quiz Question Section -->
-        <section id="quiz-container">
-            <!-- Running Question Total -->
-            <div id="question-count"></div>
-            <h2 id="question-text"></h2> <!-- Question text will be inserted here -->
-            
-            <div id="answer-buttons" class="btn-container">
-                <!-- Answer options will be generated here dynamically -->
+    <div class="center-container">
+        <div class="container">
+            <!-- Back Arrow Icon -->
+            <div class="back-arrow" onclick="backQuestion()">
+                &#8592;
             </div>
-            
-            <!-- Navigation Buttons (Back and Next) -->
-            <div class="navigation-buttons">
-                <button id="back-button" class="back-btn d-none" onclick="backQuestion()">Back</button>
-                <button id="next-button" class="next-btn disabled" onclick="nextQuestion()">Next</button>
-            </div>
-        </section>
 
-        <!-- Quiz Results Section (Initially Hidden) -->
-        <section id="result-container" class="d-none">
-            <h2>Your Recommended Test</h2>
-            <p id="result-text"></p> <!-- Final recommendation result will be shown here -->
-            <button onclick="startQuiz()" class="restart-btn">Retake Quiz</button>
-        </section>
+            <!-- Quiz Question Section -->
+            <section id="quiz-container">
+                <div id="question-count" class="question-count"></div>
+                <h2 id="question-text" class="question-text"></h2>
+                
+                <div id="answer-buttons" class="btn-container">
+                    <!-- Answer options will be generated here dynamically -->
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="navigation-buttons">
+                    <button id="back-button" class="back-btn d-none" onclick="backQuestion()">Back</button>
+                    <button id="next-button" class="next-btn disabled" onclick="nextQuestion()">Continue</button>
+                </div>
+            </section>
+
+            <!-- Quiz Results Section (Initially Hidden) -->
+            <section id="result-container" class="d-none">
+                <h2>Your Recommended Test</h2>
+                <p id="result-text"></p>
+                <button onclick="startQuiz()" class="restart-btn">Retake Quiz</button>
+            </section>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
 

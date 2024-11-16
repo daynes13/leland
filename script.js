@@ -89,15 +89,13 @@ const questions = [
 let currentQuestionIndex = 0;
 let greScore = 0;
 let gmatScore = 0;
-
-// Array to store selected answers for each question
-let selectedAnswers = [];
+let selectedAnswers = Array(questions.length).fill(null);
 
 function startQuiz() {
     currentQuestionIndex = 0;
     greScore = 0;
     gmatScore = 0;
-    selectedAnswers = Array(questions.length).fill(null); // Initialize answers
+    selectedAnswers = Array(questions.length).fill(null);
     document.getElementById('quiz-container').classList.remove('d-none');
     document.getElementById('result-container').classList.add('d-none');
     showQuestion();
@@ -106,58 +104,64 @@ function startQuiz() {
 function showQuestion() {
     const question = questions[currentQuestionIndex];
     document.getElementById('question-text').innerText = question.question;
-    document.getElementById('question-count').innerText = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+    document.getElementById('question-count').innerText = `${currentQuestionIndex + 1}/${questions.length} Questions`;
 
     const answerButtons = document.getElementById('answer-buttons');
-    answerButtons.innerHTML = ''; // Clear previous answer options
+    answerButtons.innerHTML = '';
 
     question.answers.forEach((answer, index) => {
-        const button = document.createElement('button');
-        button.innerText = answer.text;
-        button.classList.add('btn');
-
-        // Check if this answer is the selected answer and highlight it
+        const answerDiv = document.createElement('div');
+        answerDiv.classList.add('answer-option');
+        
+        // Check if this answer is already selected
         if (selectedAnswers[currentQuestionIndex] === index) {
-            button.classList.add('selected');
+            answerDiv.classList.add('selected');
         }
 
-        button.onclick = () => selectAnswer(button, answer, index);
-        answerButtons.appendChild(button);
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'answer';
+        radio.checked = selectedAnswers[currentQuestionIndex] === index;
+        radio.onclick = (e) => {
+            e.stopPropagation(); // Prevent event from bubbling up to answerDiv
+            selectAnswer(answerDiv, answer, index);
+        };
+
+        const label = document.createElement('label');
+        label.innerText = answer.text;
+
+        answerDiv.appendChild(radio);
+        answerDiv.appendChild(label);
+        answerDiv.onclick = () => selectAnswer(answerDiv, answer, index); // Make entire div clickable
+        answerButtons.appendChild(answerDiv);
     });
 
-    // Disable the Next button initially until an answer is selected
     const nextButton = document.getElementById('next-button');
-    nextButton.classList.add('disabled');
-    if (currentQuestionIndex > 0) {
-        document.getElementById('back-button').classList.remove('d-none');
-    } else {
-        document.getElementById('back-button').classList.add('d-none');
-    }
+    nextButton.classList.toggle('disabled', selectedAnswers[currentQuestionIndex] === null);
+    nextButton.disabled = selectedAnswers[currentQuestionIndex] === null;
+
+    document.getElementById('back-button').classList.toggle('d-none', currentQuestionIndex === 0);
 }
 
-function selectAnswer(button, answer, index) {
-    // Store the selected answer index
+function selectAnswer(answerDiv, answer, index) {
     selectedAnswers[currentQuestionIndex] = index;
 
-    // Clear previously selected button highlight
-    const answerButtons = document.querySelectorAll('#answer-buttons .btn');
-    answerButtons.forEach(btn => btn.classList.remove('selected'));
+    // Highlight the selected answer
+    document.querySelectorAll('.answer-option').forEach(option => option.classList.remove('selected'));
+    answerDiv.classList.add('selected');
 
-    // Highlight the selected button
-    button.classList.add('selected');
+    // Mark the radio button as checked
+    const radio = answerDiv.querySelector('input[type="radio"]');
+    radio.checked = true;
 
-    // Update scores for the current question only if this question is answered for the first time
-    if (!selectedAnswers[currentQuestionIndex]) {
-        greScore += answer.gre;
-        gmatScore += answer.gmat;
-    }
-
-    // Enable the Next button
-    document.getElementById('next-button').classList.remove('disabled');
+    // Enable the "Continue" button
+    const nextButton = document.getElementById('next-button');
+    nextButton.classList.remove('disabled');
+    nextButton.disabled = false;
 }
 
 function nextQuestion() {
-    if (selectedAnswers[currentQuestionIndex] === null) return; // Prevent skipping
+    if (selectedAnswers[currentQuestionIndex] === null) return; // Prevent skipping if no answer selected
 
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
@@ -187,5 +191,5 @@ function showResults() {
     }
 }
 
-// Initialize the quiz on page load
 startQuiz();
+
